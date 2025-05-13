@@ -44,4 +44,10 @@ app.use((request, response) => {
   logger.getErrorLog(url);
 });
 
-app.listen(PORT);
+const { mongoConnect } = require("./database");
+
+mongoConnect(() => {
+  app.listen(PORT, () => {
+    console.log(`Serwer ${PORT}`);
+  });
+});
